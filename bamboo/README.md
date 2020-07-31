@@ -6,47 +6,39 @@ Pre-requisites:
   - Install GIT
   - Install Maven
   - Install Docker
-  - Install Jenkins
-  - Create ECR Repo with the name of "hellospringboot"
-  - Create a policy for ECS full Access with name of "AmazonECSFullAccess"
-  - Create IAM Role with the name of "ecrFullAccess-ecsTaskExecutionRole" also add below policies
-      * AmazonEC2ContainerRegistryFullAccess
-      * AmazonECSTaskExecutionRolePolicy
-      * AmazonECSFullAccess
-  
-Create Maven Job:
--------
-1)  SCM: 
---------
-    
-    https://github.com/VamsiTechTuts/spring-boot-hello.git
-2)  Maven:
-----------
 
-    Give name for Maven and also give "clean install"
+![image](https://user-images.githubusercontent.com/68885738/89023437-355f6280-d341-11ea-93c7-5964e77bd9e3.png)
 
-3) Push image to ECR:
----------------------
+Click on create --> create plan
 
-    #!/usr/bin/env bash
-    export AWS_DEFAULT_REGION=us-west-2
-    $(aws ecr get-login --no-include-email --region us-west-2)
-    DOCKER_REPO=`aws ecr describe-repositories --repository-names hellospringboot | grep repositoryUri | cut -d "\"" -f 4`
-    docker build --no-cache -t ${DOCKER_REPO}:1.0 .
-    docker push ${DOCKER_REPO}:1.0
+![image](https://user-images.githubusercontent.com/68885738/89024215-5bd1cd80-d342-11ea-8077-f455d6f6e00e.png)
+![image](https://user-images.githubusercontent.com/68885738/89024288-799f3280-d342-11ea-94b9-35a873115085.png)
+Click on Configure plan
 
-4)  Deploy Spring boot application On ECS:
-------------------------------------------
+![image](https://user-images.githubusercontent.com/68885738/89024749-3b564300-d343-11ea-9888-a755f1c8037a.png)
+Click on Add task
 
-    #!/usr/bin/env bash
-    export AWS_DEFAULT_REGION=us-west-2
-    dockerRepo=`aws ecr describe-repositories --repository-name hellospringboot --region us-west-2 | grep repositoryUri | cut -d "\"" -f 4`
-    dockerTag=`aws ecr list-images --repository-name hellospringboot --region us-west-2 | grep imageTag | head -n 1 | cut -d "\"" -f 4`
-    sed -e "s;DOCKER_IMAGE_NAME;${dockerRepo}:${dockerTag};g" ${WORKSPACE}/template.json > taskDefinition.json
-    aws ecs create-cluster --cluster-name test-cluster
-    aws ecs register-task-definition --family jenkins-test --cli-input-json file://taskDefinition.json --region us-west-2
-    revision=`aws ecs describe-task-definition --task-definition jenkins-test --region us-west-2 | grep "revision" | tr -s " " | cut -d " " -f 3`
-    aws ecs create-service --cluster test-cluster --service-name test-service --task-definition jenkins-test:${revision} --desired-count 1 --launch-type FARGATE --platform-version LATEST --network-configuration "awsvpcConfiguration={subnets=[subnet-8a1fdcf2],securityGroups=[sg-f9abbfaa],assignPublicIp=ENABLED}"
-    
+![image](https://user-images.githubusercontent.com/68885738/89024895-7eb0b180-d343-11ea-813a-a5751c434ad2.png)
+Click on Maven 3.X
+
+![image](https://user-images.githubusercontent.com/68885738/89025028-c3d4e380-d343-11ea-9a11-853d41ab743a.png)
+Give name for 
+
+![image](https://user-images.githubusercontent.com/68885738/89025146-f383eb80-d343-11ea-900a-2da13ecabc0e.png)
+Unckeck for The build will produce test results.
+Click on save and then click on save and continue
+
+![image](https://user-images.githubusercontent.com/68885738/89025774-0a770d80-d345-11ea-9d94-6240305a15d5.png)
+Click on Source Code Checkout configuration and check-out directory as bamboo
+
+![image](https://user-images.githubusercontent.com/68885738/89025354-4eb5de00-d344-11ea-8386-a1804effaa57.png)
+Select Artifact and click on create artifact
+
+![image](https://user-images.githubusercontent.com/68885738/89025439-7e64e600-d344-11ea-85ba-8b4d19c3596c.png)
+Give Name and location details as shown above
+Make plan to Enable
+
+
+
   
 
