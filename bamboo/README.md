@@ -32,7 +32,7 @@ Pre-requisites:
 # Give Name and location details as shown above
 # Make plan to Enable
 
-Click on Run and then click on Run plan
+# Click on Run and then click on Run plan
 
 
   
