@@ -34,6 +34,9 @@ Click on Source Code Checkout configuration and check-out directory as bamboo
 ![image](https://user-images.githubusercontent.com/68885738/89025354-4eb5de00-d344-11ea-8386-a1804effaa57.png)
 Select Artifact and click on create artifact
 
+![image](https://user-images.githubusercontent.com/68885738/89027451-28923d00-d348-11ea-8a25-7950dabecb6f.png)
+Select Artifact and click on create artifact
+
 ![image](https://user-images.githubusercontent.com/68885738/89025439-7e64e600-d344-11ea-85ba-8b4d19c3596c.png)
 Give Name and location details as shown above
 Make plan to Enable
