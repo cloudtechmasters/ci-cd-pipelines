@@ -22,6 +22,8 @@ Pre-requisites:
 # Click on Maven 3.X
 
 ![image](https://user-images.githubusercontent.com/68885738/89027451-28923d00-d348-11ea-8a25-7950dabecb6f.png)
+![image](https://user-images.githubusercontent.com/68885738/89029254-a441b900-d34b-11ea-8a95-d4fba18816fc.png)
+# Click on Add new executable and give path for maven
 # Check out to bamboo directory and Unckeck for The build will produce test results.
 # Click on save and then click on save and continue
 
@@ -33,7 +35,3 @@ Pre-requisites:
 # Make plan to Enable
 
 # Click on Run and then click on Run plan
-
-
-  
-
